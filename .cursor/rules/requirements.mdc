@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+---
+Requirements for College Bus Service Management App
+1. User Roles
+Students: View bus routes, track bus location, and receive notifications.
+Drivers: Update bus location, report issues, and manage schedules.
+Admins: Manage routes, buses, drivers, notifications, and vehicle maintenance.
+2. Core Features
+Student Features
+User registration & login (OAuth, email, or phone verification).
+View bus routes and schedules.
+Real-time bus tracking (GPS integration).
+Push notifications for bus arrival & delays.
+Request seat reservations (if applicable).
+Report issues (late arrival, overcrowding, etc.).
+Driver Features
+Login with driver credentials.
+Update real-time location of the bus.
+View assigned routes and schedules.
+Report maintenance or delay issues.
+Update bus FC (fitness certificate) status and expiry date.
+Notify admins about tire changes or required maintenance.
+Admin Features
+Manage student and driver accounts.
+Add, update, and delete bus routes.
+Assign drivers to buses.
+Send notifications or emergency alerts.
+View reports and analytics on bus performance.
+Bus Maintenance Management:
+Store and track Bus FC details (expiry date, renewal reminders).
+Log tire changes (date, replaced tires, mechanic details).
+Set maintenance schedules and receive alerts.
+3. Technical Requirements
+Frontend: React Native with Expo.
+Backend: Node.js with Express (or Firebase).
+Database: MongoDB, PostgreSQL, or Firebase Firestore.
+Authentication: Firebase Auth, JWT-based authentication.
+Real-time Tracking: Google Maps API for GPS tracking.
+Push Notifications: Firebase Cloud Messaging (FCM).
+Hosting: Firebase, AWS, or Heroku for backend services.
+4. Additional Considerations
+Offline mode for viewing schedules.
+Dark mode support.
+Multi-language support (optional).
+Role-based access control for different user types.
