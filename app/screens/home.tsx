@@ -1,7 +1,8 @@
-import { StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StyleSheet, ScrollView, Pressable, Image } from 'react-native';
+import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { router } from 'expo-router';
 
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
@@ -10,8 +11,8 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 const MENU_ITEMS = [
   {
     id: 'schedule',
-    title: 'Bus Schedule',
-    icon: 'clock.fill',
+    title: 'Bus Details',
+    icon: 'magnifyingglass',
     description: 'View bus timings and routes'
   },
   {
@@ -35,21 +36,18 @@ const MENU_ITEMS = [
 ];
 
 export default function HomeScreen() {
-  const router = useRouter();
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <ScrollView>
         <ThemedView style={styles.header}>
-          <IconSymbol 
-            name="house.fill"
-            size={100}
-            color="#0a7ea4"
+          <Image 
+            source={require('@/assets/images/bait-logo.png')}
             style={styles.logo}
+            resizeMode="contain"
           />
           <ThemedText type="title">College Bus Service</ThemedText>
-          <ThemedText type="subtitle">Welcome Student!</ThemedText>
+          <ThemedText type="subtitle">Welcome Student</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.menuGrid}>
@@ -60,7 +58,7 @@ export default function HomeScreen() {
               onPress={() => router.push(`/${item.id}` as any)}>
               <ThemedView style={styles.menuContent}>
                 <IconSymbol 
-                  name={item.icon as "clock.fill" | "person.2.fill" | "map.fill" | "bell.fill"}
+                  name={item.icon as "magnifyingglass" | "person.2.fill" | "map.fill" | "bell.fill"}
                   size={32}
                   color="#0a7ea4"
                 />
@@ -75,6 +73,7 @@ export default function HomeScreen() {
           <ThemedText type="subtitle">Today's Schedule</ThemedText>
           <ThemedView style={styles.infoCard}>
             <ThemedText type="defaultSemiBold">Next Bus: 4:30 PM</ThemedText>
+            <ThemedText>Bus Number: BIT-101</ThemedText>
             <ThemedText>Route: Main Campus → City Center</ThemedText>
             <ThemedText>Your Seat: 23B</ThemedText>
           </ThemedView>
@@ -94,8 +93,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   logo: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     marginBottom: 10,
   },
   menuGrid: {

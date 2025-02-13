@@ -18,6 +18,7 @@ const MAPPING = {
   'map.fill': 'map',
   'bell.fill': 'notifications',
   'bus.fill': 'directions-bus',
+  'magnifyingglass': 'search',
 } as const;
 
 export type IconSymbolName = keyof typeof MAPPING;

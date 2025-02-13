@@ -5,8 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from 'react-native';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,7 +31,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="screens/home" options={{ headerShown: false }} />
-        <Stack.Screen name="schedule" options={{ title: 'Bus Schedule' }} />
+        <Stack.Screen name="schedule" options={{ title: 'Bus Details' }} />
         <Stack.Screen name="seat-allotment" options={{ title: 'Seat Allotment' }} />
         <Stack.Screen name="routes" options={{ title: 'Bus Routes' }} />
         <Stack.Screen name="notifications" options={{ title: 'Updates' }} />
