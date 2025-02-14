@@ -3,6 +3,8 @@ import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
@@ -36,6 +38,22 @@ const MENU_ITEMS = [
 ];
 
 export default function HomeScreen() {
+  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getSelectedSeat = async () => {
+      try {
+        const bookedSeat = await AsyncStorage.getItem('bookedSeat');
+        if (bookedSeat) {
+          setSelectedSeat(bookedSeat);
+        }
+      } catch (error) {
+        console.error('Error fetching booked seat:', error);
+      }
+    };
+    getSelectedSeat();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -75,7 +93,7 @@ export default function HomeScreen() {
             <ThemedText type="defaultSemiBold">Next Bus: 4:30 PM</ThemedText>
             <ThemedText>Bus Number: BIT-101</ThemedText>
             <ThemedText>Route: Main Campus → City Center</ThemedText>
-            <ThemedText>Your Seat: 23B</ThemedText>
+            <ThemedText>Your Seat: {selectedSeat || 'Not Selected'}</ThemedText>
           </ThemedView>
         </ThemedView>
       </ScrollView>

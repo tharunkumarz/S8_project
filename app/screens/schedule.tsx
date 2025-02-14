@@ -30,6 +30,7 @@ export default function ScheduleScreen() {
       setIsLoading(true);
       setError(null);
       const data = await getBusSchedules();
+      console.log('Fetched data:', data);
       setBusDetails(data);
     } catch (err) {
       setError('Failed to fetch bus schedules');
@@ -41,19 +42,19 @@ export default function ScheduleScreen() {
 
   const renderBusCard = ({ item }: { item: BusSchedule }) => (
     <ThemedView style={styles.busCard}>
-      <ThemedText style={[styles.text, styles.busNumber]}>
+      <ThemedText style={styles.busNumber}>
         Bus No: {item.busNumber}
       </ThemedText>
-      <ThemedText style={styles.text}>
+      <ThemedText style={styles.detailText}>
         Departure City: {item.departureCity}
       </ThemedText>
-      <ThemedText style={styles.text}>
+      <ThemedText style={styles.detailText}>
         Departure Time: {item.departureTime}
       </ThemedText>
-      <ThemedText style={styles.text}>
+      <ThemedText style={styles.detailText}>
         Return Time: {item.returnTime}
       </ThemedText>
-      <ThemedText style={styles.text}>
+      <ThemedText style={styles.detailText}>
         Stopping: {item.stops.join(', ')}
       </ThemedText>
     </ThemedView>
@@ -93,7 +94,7 @@ export default function ScheduleScreen() {
             bus.busNumber.toLowerCase().includes(searchQuery.toLowerCase())
           )}
           renderItem={renderBusCard}
-          keyExtractor={item => item.busNumber} // Using busNumber as unique key since id doesn't exist
+          keyExtractor={(item, index) => index.toString()}
           contentContainerStyle={styles.listContainer}
           refreshing={isLoading}
           onRefresh={fetchBusSchedules}
@@ -123,29 +124,28 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 16,
-    gap: 16,
   },
   busCard: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    padding: 15,
-    marginBottom: 10,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
   },
-  text: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: '#333',
-  },
   busNumber: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#0a7ea4',
     marginBottom: 12,
+  },
+  detailText: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 8,
   },
   centerContent: {
     flex: 1,
