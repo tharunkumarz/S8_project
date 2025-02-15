@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Pressable, Image } from 'react-native';
+import { StyleSheet, ScrollView, Pressable, Image, View } from 'react-native';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { getNotifications } from '../services/notificationService';
 
 const MENU_ITEMS = [
   {
@@ -39,6 +40,7 @@ const MENU_ITEMS = [
 
 export default function HomeScreen() {
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     const getSelectedSeat = async () => {
@@ -52,6 +54,16 @@ export default function HomeScreen() {
       }
     };
     getSelectedSeat();
+  }, []);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      const notifications = await getNotifications();
+      const unreadNotifications = notifications.filter(notification => !notification.isRead);
+      setUnreadCount(unreadNotifications.length);
+    };
+
+    fetchNotifications();
   }, []);
 
   return (
@@ -82,6 +94,11 @@ export default function HomeScreen() {
                 />
                 <ThemedText type="subtitle">{item.title}</ThemedText>
                 <ThemedText style={styles.description}>{item.description}</ThemedText>
+                {item.id === 'notifications' && unreadCount > 0 && (
+                  <View style={styles.badge}>
+                    <ThemedText style={styles.badgeText}>{unreadCount}</ThemedText>
+                  </View>
+                )}
               </ThemedView>
             </Pressable>
           ))}
@@ -149,5 +166,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius: 12,
     gap: 8,
+  },
+  badge: {
+    position: 'absolute',
+    right: 10,
+    top: -5,
+    backgroundColor: '#e91e63',
+    borderRadius: 10,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  badgeText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
   },
 }); 

@@ -33,8 +33,16 @@ export default function RootLayout() {
         <Stack.Screen name="screens/home" options={{ headerShown: false }} />
         <Stack.Screen name="schedule" options={{ title: 'Bus Details' }} />
         <Stack.Screen name="seat-allotment" options={{ title: 'Seat Allotment' }} />
-        <Stack.Screen name="routes" options={{ title: 'Bus Routes' }} />
-        <Stack.Screen name="notifications" options={{ title: 'Updates' }} />
+        <Stack.Screen name="routes" options={{ headerShown: false }} />
+        <Stack.Screen 
+          name="notifications" 
+          options={{ 
+            title: 'Updates',
+            headerStyle: {
+              backgroundColor: '#f5f5f5',
+            },
+          }} 
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

@@ -16,7 +16,7 @@ export const api = create({
 
 export const getBusSchedules = async (): Promise<BusSchedule[]> => {
   try {
-    const response = await api.get('/buses');
+    const response = await api.get<BusSchedule[]>('/buses');
     if (response.ok && response.data) {
       return response.data;
     }

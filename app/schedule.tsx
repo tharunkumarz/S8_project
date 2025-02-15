@@ -12,44 +12,109 @@ type BusDetail = {
   busNumber: string;
   route: string;
   departureTime: string;
-  arrivalTime: string;
-  availableSeats: number;
+  eveningArrival: string;
+  stops: string[];
 };
+
+// Update the initial bus details array
+const initialSchedules: BusDetail[] = [
+  {
+    id: '1',
+    busNumber: 'Bus No: 1',
+    route: 'Coimbatore',
+    departureTime: '7:00 AM',
+    eveningArrival: '6:00 PM',
+    stops: ['Annur', 'Puliyampatti'],
+  },
+  {
+    id: '2',
+    busNumber: 'Bus No: 2',
+    route: 'Gandhipuram',
+    departureTime: '7:15 AM',
+    eveningArrival: '6:15 PM',
+    stops: ['Saravanampatti', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '3',
+    busNumber: 'Bus No: 3',
+    route: 'RS Puram',
+    departureTime: '7:30 AM',
+    eveningArrival: '6:30 PM',
+    stops: ['Thudiyalur', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '4',
+    busNumber: 'Bus No: 4',
+    route: 'Ukkadam',
+    departureTime: '7:00 AM',
+    eveningArrival: '6:00 PM',
+    stops: ['Singanallur', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '5',
+    busNumber: 'Bus No: 5',
+    route: 'Singanallur',
+    departureTime: '7:20 AM',
+    eveningArrival: '6:20 PM',
+    stops: ['Ganapathy', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '6',
+    busNumber: 'Bus No: 6',
+    route: 'Peelamedu',
+    departureTime: '7:45 AM',
+    eveningArrival: '6:45 PM',
+    stops: ['Hopes', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '7',
+    busNumber: 'Bus No: 7',
+    route: 'Saravanampatti',
+    departureTime: '7:10 AM',
+    eveningArrival: '6:10 PM',
+    stops: ['Kovil Palayam', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '8',
+    busNumber: 'Bus No: 8',
+    route: 'Thudiyalur',
+    departureTime: '7:05 AM',
+    eveningArrival: '6:05 PM',
+    stops: ['Ganeshapuram', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '9',
+    busNumber: 'Bus No: 9',
+    route: 'Ganapathy',
+    departureTime: '7:25 AM',
+    eveningArrival: '6:25 PM',
+    stops: ['Vinayagapuram', 'Annur', 'Puliyampatti'],
+  },
+  {
+    id: '10',
+    busNumber: 'Bus No: 10',
+    route: 'Hopes',
+    departureTime: '7:35 AM',
+    eveningArrival: '6:35 PM',
+    stops: ['Kanthi Nagar', 'Annur', 'Puliyampatti'],
+  },
+];
 
 export default function ScheduleScreen() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [busSchedules, setBusSchedules] = useState<BusDetail[]>([]);
-  const [filteredSchedules, setFilteredSchedules] = useState<BusDetail[]>([]);
+  const [schedules, setSchedules] = useState<BusDetail[]>(initialSchedules);
+  const [filteredSchedules, setFilteredSchedules] = useState<BusDetail[]>(initialSchedules);
 
-  // Fetch bus details from your database
+  // Remove or modify the useEffect that was overwriting the data
   useEffect(() => {
-    // TODO: Replace with actual API call
-    const mockData: BusDetail[] = [
-      {
-        id: '1',
-        busNumber: 'BIT-101',
-        route: 'Main Campus → City Center',
-        departureTime: '7:30 AM',
-        arrivalTime: '8:30 AM',
-        availableSeats: 25,
-      },
-      {
-        id: '2',
-        busNumber: 'BIT-102',
-        route: 'City Center → Main Campus',
-        departureTime: '4:30 PM',
-        arrivalTime: '5:30 PM',
-        availableSeats: 30,
-      },
-    ];
-    setBusSchedules(mockData);
-    setFilteredSchedules(mockData);
+    // No need to fetch mock data since we're using initialSchedules
+    setFilteredSchedules(initialSchedules);
   }, []);
 
   // Handle search
   const handleSearch = (text: string) => {
     setSearchQuery(text);
-    const filtered = busSchedules.filter(
+    const filtered = schedules.filter(
       bus =>
         bus.busNumber.toLowerCase().includes(text.toLowerCase()) ||
         bus.route.toLowerCase().includes(text.toLowerCase())
@@ -81,13 +146,11 @@ export default function ScheduleScreen() {
           data={filteredSchedules}
           renderItem={({ item }) => (
             <ThemedView style={styles.busCard}>
-              <ThemedText type="defaultSemiBold">Bus Number: {item.busNumber}</ThemedText>
+              <ThemedText type="defaultSemiBold">{item.busNumber}</ThemedText>
               <ThemedText>Route: {item.route}</ThemedText>
-              <ThemedView style={styles.timeContainer}>
-                <ThemedText>Departure: {item.departureTime}</ThemedText>
-                <ThemedText>Arrival: {item.arrivalTime}</ThemedText>
-              </ThemedView>
-              <ThemedText>Available Seats: {item.availableSeats}</ThemedText>
+              <ThemedText>Departure: {item.departureTime}</ThemedText>
+              <ThemedText>Evening Arrival: {item.eveningArrival}</ThemedText>
+              <ThemedText>Stops: {item.stops.join(', ')}</ThemedText>
             </ThemedView>
           )}
           keyExtractor={item => item.id}

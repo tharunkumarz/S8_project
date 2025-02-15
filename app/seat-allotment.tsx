@@ -1,5 +1,5 @@
 import { Stack, router } from 'expo-router';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -179,7 +179,7 @@ export default function SeatAllotmentScreen() {
             disabled={selectedSeats.length === 0}
           >
             <ThemedText style={styles.buttonText}>
-              {selectedSeats.length === 0 ? 'Select a seat' : 'BOOK'}
+              Confirm Selection
             </ThemedText>
           </TouchableOpacity>
         </ThemedView>
@@ -191,18 +191,23 @@ export default function SeatAllotmentScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#fff',
+  },
+  scrollContent: {
+    flex: 1,
+    paddingHorizontal: 12,
+    paddingTop: 8,
   },
   legend: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 16,
-    marginBottom: 20,
+    paddingVertical: 8,
+    marginBottom: 8,
   },
   legendItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 4,
   },
   legendBox: {
     width: 20,
@@ -211,37 +216,38 @@ const styles = StyleSheet.create({
   },
   busLayout: {
     flex: 1,
-    padding: 16,
     backgroundColor: '#f5f5f5',
     borderRadius: 12,
+    padding: 12,
+    marginBottom: 8,
   },
   seatGrid: {
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    gap: 8,
   },
   rowContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 8,
-    width: '100%',
+    height: 44,
+    marginBottom: 6,
   },
   leftSeats: {
     flexDirection: 'row',
     gap: 8,
-    justifyContent: 'flex-end',
     width: '40%',
+    justifyContent: 'flex-end',
   },
   rightSeats: {
     flexDirection: 'row',
     gap: 8,
-    justifyContent: 'flex-start',
     width: '40%',
+    justifyContent: 'flex-start',
   },
   aisle: {
     width: '20%',
-    height: 45,
+    height: 44,
   },
   seat: {
     width: 40,
@@ -268,17 +274,18 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   footer: {
-    marginTop: 20,
-    gap: 16,
+    padding: 12,
+    gap: 8,
   },
   note: {
     fontStyle: 'italic',
     color: '#666',
     textAlign: 'center',
+    fontSize: 12,
   },
   nextButton: {
     backgroundColor: '#4c9cb0',
-    padding: 16,
+    padding: 12,
     borderRadius: 8,
     alignItems: 'center',
   },
