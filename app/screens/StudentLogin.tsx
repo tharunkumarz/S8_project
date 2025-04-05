@@ -8,6 +8,8 @@ export default function StudentLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRoleState] = useState<'student' | 'admin'>('student');
+  const [usernameFocused, setUsernameFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const router = useRouter();
 
   // Animation state
@@ -43,6 +45,7 @@ export default function StudentLogin() {
       <Image
         source={require('@/assets/images/college-logo.png')} // Update with your logo path
         style={styles.logo}
+        resizeMode="contain" // Ensure the logo is not cropped
       />
       <Text style={styles.welcomeText}>Hi, Welcome Back!</Text>
       
@@ -68,17 +71,21 @@ export default function StudentLogin() {
       </View>
 
       <TextInput
-        style={[styles.input, { marginTop: 20 }]}
+        style={[styles.input, usernameFocused && styles.inputFocused]}
         placeholder="Username or Email Address"
         value={username}
         onChangeText={setUsername}
+        onFocus={() => setUsernameFocused(true)}
+        onBlur={() => setUsernameFocused(false)}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, passwordFocused && styles.inputFocused]}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        onFocus={() => setPasswordFocused(true)}
+        onBlur={() => setPasswordFocused(false)}
       />
       <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Log in</Text>
@@ -98,8 +105,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9', // Light background color
   },
   logo: {
-    width: 120, // Adjusted width
-    height: 120, // Adjusted height
+    width: '100%', // Set width to 100% to fill the container
+    height: 120, // Adjust height as needed
     alignSelf: 'center',
     marginBottom: 10,
   },
@@ -119,6 +126,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width: '80%', // Adjust width as needed
     alignSelf: 'center',
+    marginBottom: 20, // Added margin to create space below the role toggle
   },
   roleButton: {
     flex: 1,
@@ -137,11 +145,24 @@ const styles = StyleSheet.create({
     fontSize: 15, // Increased text size
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    height: 50, // Increased height for better touch area
+    borderColor: '#A9A9A9', // Border color
+    borderWidth: 2, // Thicker border
+    borderRadius: 10, // Rounded corners
     marginBottom: 12,
-    paddingHorizontal: 8,
+    paddingHorizontal: 15, // Padding inside the input
+    backgroundColor: '#ffffff', // White background for inputs
+    shadowColor: '#000', // Shadow for iOS
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3, // Shadow for Android
+  },
+  inputFocused: {
+    borderColor: '#0a7ea4', // Change border color when focused
   },
   loginButton: {
     backgroundColor: '#0a7ea4', // Updated color for login button

@@ -46,6 +46,7 @@ export default function RootLayout() {
             }} 
           />
           <Stack.Screen name="screens/student-login" options={{ title: 'Login Page' }} />
+          <Stack.Screen name="services" options={{ title: 'Services' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

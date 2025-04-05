@@ -8,14 +8,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import type { IconSymbolName } from '@/components/ui/IconSymbol';
-
-type AppRoutes = {
-  '/schedule': undefined;
-  '/seat-allotment': undefined;
-  '/routes': undefined;
-  '/notifications': undefined;
-  '/screens/StudentLogin': undefined;
-};
+import type { AppRoutes } from '../navigation/types';
 
 type MenuItem = {
   id: keyof AppRoutes;
@@ -24,36 +17,44 @@ type MenuItem = {
   description: string;
 };
 
-const MENU_ITEMS: MenuItem[] = [
-  {
-    id: '/schedule',
-    title: 'Bus Schedule',
-    icon: 'clock.fill',
-    description: 'View bus timings and routes'
-  },
-  {
-    id: '/seat-allotment',
-    title: 'Seat Allotment',
-    icon: 'person.2.fill',
-    description: 'View and manage seat assignments'
-  },
-  {
-    id: '/routes',
-    title: 'Bus Routes',
-    icon: 'map.fill',
-    description: 'View all bus routes and stops'
-  },
-  {
-    id: '/notifications',
-    title: 'Updates',
-    icon: 'bell.fill',
-    description: 'Important announcements'
-  },
-];
-
 export default function HomeScreen() {
   const router = useRouter();
   const { role } = useUser();
+
+  console.log('Current role:', role);
+
+  const MENU_ITEMS: MenuItem[] = [
+    {
+      id: '/schedule',
+      title: 'Bus Schedule',
+      icon: 'clock.fill',
+      description: 'View bus timings and routes'
+    },
+    {
+      id: '/seat-allotment',
+      title: 'Seat Allotment',
+      icon: 'person.2.fill',
+      description: 'View and manage seat assignments'
+    },
+    {
+      id: '/routes',
+      title: 'Bus Routes',
+      icon: 'map.fill',
+      description: 'View all bus routes and stops'
+    },
+    {
+      id: '/notifications',
+      title: 'Updates',
+      icon: 'bell.fill',
+      description: 'Important announcements'
+    },
+    ...(role === 'admin' ? [{
+      id: '/services' as keyof AppRoutes,
+      title: 'Services', 
+      icon: 'bus.fill' as IconSymbolName,
+      description: 'Manage services offered'
+    }] : []),
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,15 +66,15 @@ export default function HomeScreen() {
             style={styles.logo}
           />
           <ThemedText type="title">College Bus Service</ThemedText>
-          <ThemedText type="subtitle">Welcome {role === 'student' ? 'Student' : 'Admin'}!</ThemedText>
+          <ThemedText type="subtitle">Welcome {role === 'student' ? 'Student' : 'Master'}!</ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.menuGrid}>
           {MENU_ITEMS.map((item) => (
             <Pressable
-              key={item.id.toString()}
-              style={styles.menuItem}
-              onPress={() => router.push(item.id)}>
+              key={item.id}
+              style={styles.menuItem} 
+              onPress={() => router.push(`${item.id}` as any)}>
               <ThemedView style={styles.menuContent}>
                 <IconSymbol 
                   name={item.icon}
