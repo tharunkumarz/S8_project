@@ -19,7 +19,7 @@ The entire project was developed using **AI-assisted tools (Vibe Coding)** for f
 ### 🚌 Bus Details
 - Bus number and route details
 - Driver details
-- Real-time updates (optional)
+- Real-time updates 
 
 ### ⏰ Bus Timing
 - Morning and evening timing list
@@ -28,7 +28,7 @@ The entire project was developed using **AI-assisted tools (Vibe Coding)** for f
 ### 💺 Seat Booking
 - View available seats
 - Select and confirm seat booking
-- Visual seat layout (if implemented)
+- Visual seat layout 
 
 ### 💳 Payment Flow
 - Mock payment screen
@@ -53,12 +53,10 @@ The entire project was developed using **AI-assisted tools (Vibe Coding)** for f
 - React Native Maps / Expo Maps
 - Vibe Coding (AI-powered tool for development)
 - React Hooks
-- StyleSheet / Tailwind (if used)
+- StyleSheet / Tailwind 
 
 ### **Backend**
-- Dummy JSON data  
-*(Add API details if any real backend was used)*
-
+- Dummy JSON data 
 ---
 
 ## 🚀 Getting Started
