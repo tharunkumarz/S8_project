@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+# 🚍 College Bus Service Management System – Mobile Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a **mobile application built using Expo (React Native)** for managing college bus services.  
+The entire project was developed using **AI-assisted tools (Vibe Coding)** for faster UI development and logic generation.
 
-## Get started
+---
 
-1. Install dependencies
+## 📱 Features
 
-   ```bash
-   npm install
-   ```
+### 🔐 Login & Authentication
+- Student login page
+- Validates user credentials
+- Simple and clean UI
 
-2. Start the app
+### 🏠 Dashboard
+- Overview of all main features
+- Quick access tiles
 
-   ```bash
-    npx expo start
-   ```
+### 🚌 Bus Details
+- Bus number and route details
+- Driver details
+- Real-time updates (optional)
 
-In the output, you'll find options to open the app in a
+### ⏰ Bus Timing
+- Morning and evening timing list
+- Easy-to-read layout
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 💺 Seat Booking
+- View available seats
+- Select and confirm seat booking
+- Visual seat layout (if implemented)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 💳 Payment Flow
+- Mock payment screen
+- Simple confirmation UI
 
-## Get a fresh project
+### 📍 Navigation
+- Map-based navigation
+- Shows bus route and boarding point
 
-When you're ready, run:
+---
 
+## 🛠️ Tech Stack
+
+### **Frontend**
+- React Native
+- Expo
+- Expo Router (file-based navigation)
+- JavaScript
+
+### **Libraries & Tools**
+- Expo Go
+- React Native Maps / Expo Maps
+- Vibe Coding (AI-powered tool for development)
+- React Hooks
+- StyleSheet / Tailwind (if used)
+
+### **Backend**
+- Dummy JSON data  
+*(Add API details if any real backend was used)*
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
 ```bash
-npm run reset-project
-```
+npm install
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 1. Install dependencies
