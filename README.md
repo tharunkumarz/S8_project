@@ -66,5 +66,3 @@ The entire project was developed using **AI-assisted tools (Vibe Coding)** for f
 ### 1. Install dependencies
 ```bash
 npm install
-
-### 1. Install dependencies
